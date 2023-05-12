@@ -7,24 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,500,700,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Picfolio | Login</title>
+    <title>Picfolio | Sign Up</title>
 </head>
 
 <body>
-    <div class="wrapper login-wrapper">
+    <div class="wrapper signup-wrapper">
         <div class="form-container">
             <div class="logo">
                 <img src="./assets/images/logo-icon.png" alt="">
-                <h1 class="fw-bold fs-title-sm">Picfolio</h1>
+                <h1 class="fw-semi-bold fs-title-sm">Picfolio</h1>
             </div>
-            <div class="login">
-                <h3 class="fw-black fs-title-lg">Log In to your accout</h3>
-                <p class="text-neutral-300 fs-body-sm fw-medium" style="max-width:95%; text-align:center;margin-top:0.5em">Welcome
-                    back, login to
-                    your
-                    account and continue where you left</p>
+            <div class="signup">
+                <h3 class="fw-black fs-title-lg">Create your accout</h3>
+                <p class="text-neutral-300 fs-body-sm" style="max-width:95%; text-align:center;margin-top:0.5em">Create
+                    your account and get 30 day free trial</p>
 
-                <form class="login-form" action="" method="post">
+                <form class="signup-form" action="" method="post">
+
+                    <div class="input">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" placeholder="Enter your full name" required>
+                    </div>
+
                     <div class="input">
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email" placeholder="Enter your email" required>
@@ -35,10 +39,10 @@
                         <input type="password" name="password" id="password" placeholder="********" required>
                     </div>
 
-                    <button class="btn btn--submit" type="submit">Login</button>
+                    <button class="btn btn--submit" type="submit">Sign Up</button>
 
-                    <p class="fs-body-sm">New to picfolio?
-                        <a href="/signup.php" class="text-neutral-900 fw-bold">Sign Up</a>
+                    <p class="fs-body-sm">Already have an account?
+                        <a href="/" class="text-neutral-900 fw-bold">Login</a>
                     </p>
                 </form>
             </div>
