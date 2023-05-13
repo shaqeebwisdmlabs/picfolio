@@ -40,7 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $userModel->create($name, $email, $hashedPassword);
 
-        header("Location: home.php");
+        $user = $userModel->findUserByEmail($email);
+        session_start();
+        $_SESSION["user_id"] = $user["user_id"];
+
+        header("Location: /home.php");
         exit();
     }
 }
@@ -74,19 +78,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div class="input">
                         <label for="name">Name</label>
-                        <input type="text" name="name" id="name" placeholder="Enter your full name"
-                            value="<?php echo isset($_POST["name"]) ? $_POST["name"] : ""; ?>">
+                        <input type="text" name="name" id="name" placeholder="Enter your full name" value="<?php echo isset($_POST["name"]) ? $_POST["name"] : ""; ?>">
                         <?php if (!empty($errors["name"])) : ?>
-                        <span class="error"><?php echo $errors["name"]; ?></span>
+                            <span class="error"><?php echo $errors["name"]; ?></span>
                         <?php endif; ?>
                     </div>
 
                     <div class="input">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Enter your email"
-                            value="<?php echo isset($_POST["email"]) ? $_POST["email"] : ""; ?>">
+                        <input type="email" name="email" id="email" placeholder="Enter your email" value="<?php echo isset($_POST["email"]) ? $_POST["email"] : ""; ?>">
                         <?php if (!empty($errors["email"])) : ?>
-                        <span class="error"><?php echo $errors["email"]; ?></span>
+                            <span class="error"><?php echo $errors["email"]; ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -94,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label for="password">Password</label>
                         <input type="password" name="password" id="password" placeholder="********">
                         <?php if (!empty($errors["password"])) : ?>
-                        <span class="error"><?php echo $errors["password"]; ?></span>
+                            <span class="error"><?php echo $errors["password"]; ?></span>
                         <?php endif; ?>
                     </div>
 

@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: index.php");
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +30,7 @@
             <a href="/upload.php" class="btn btn--upload" style="text-decoration:none">
                 Upload
             </a>
-            <a href="/logout.php" class="btn btn--logout" style="text-decoration:none" class="fw-bold text-neutral-900">
+            <a href="/logout.php" class="btn btn--logout" style="text-decoration:none" class="fw-bold">
                 Logout
             </a>
         </div>

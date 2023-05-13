@@ -24,10 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $userModel = new User($conn);
     $user = $userModel->findUserByEmail($email);
-    echo $user;
+
     if ($user && password_verify($password, $user["password"]) && empty($errors)) {
-        $_SESSION["user_id"] = $user["id"];
-        header("Location: home.php");
+        session_start();
+        $_SESSION["user_id"] = $user["user_id"];
+        header("Location: /home.php");
         exit();
     } else {
         $errors["login"] = "Invalid email or password";
@@ -56,8 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="login">
                 <h3 class="fw-black fs-title-lg" style="text-align:center">Log In to your accout</h3>
-                <p class="text-neutral-300 fs-body-sm fw-medium"
-                    style="max-width:95%; text-align:center;margin-top:0.5em">Welcome
+                <p class="text-neutral-300 fs-body-sm fw-medium" style="max-width:95%; text-align:center;margin-top:0.5em">Welcome
                     back, login to
                     your
                     account and continue where you left</p>
@@ -65,10 +65,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <form class="login-form" action="" method="post">
                     <div class="input">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Enter your email"
-                            value="<?php echo isset($_POST["email"]) ? $_POST["email"] : ""; ?>">
+                        <input type="email" name="email" id="email" placeholder="Enter your email" value="<?php echo isset($_POST["email"]) ? $_POST["email"] : ""; ?>">
                         <?php if (!empty($errors["email"])) : ?>
-                        <span class="error"><?php echo $errors["email"]; ?></span>
+                            <span class="error"><?php echo $errors["email"]; ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -76,13 +75,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label for="password">Password</label>
                         <input type="password" name="password" id="password" placeholder="********">
                         <?php if (!empty($errors["password"])) : ?>
-                        <span class="error"><?php echo $errors["password"]; ?></span>
+                            <span class="error"><?php echo $errors["password"]; ?></span>
                         <?php endif; ?>
                     </div>
 
                     <button class="btn btn--submit" type="submit">Login</button>
                     <?php if (!empty($errors["login"])) : ?>
-                    <span class="error"><?php echo $errors["login"]; ?></span>
+                        <span class="error"><?php echo $errors["login"]; ?></span>
                     <?php endif; ?>
 
                     <p class="fs-body-sm">New to picfolio?
