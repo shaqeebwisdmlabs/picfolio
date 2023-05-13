@@ -566,3 +566,8 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.error {
+  color: hsl(var(--clr-red));
+  font-size: var(--fs-body-x-sm);
+}
