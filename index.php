@@ -1,3 +1,40 @@
+<?php
+require_once "./config/dbconn.php";
+require_once "./models/User.php";
+
+session_start();
+
+$errors = array();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    // Validate email
+    if (empty($email)) {
+        $errors["email"] = "Email is required";
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors["email"] = "Invalid email format";
+    }
+
+    // Validate password
+    if (empty($password)) {
+        $errors["password"] = "Password is required";
+    }
+
+    $userModel = new User($conn);
+    $user = $userModel->findUserByEmail($email);
+    echo $user;
+    if ($user && password_verify($password, $user["password"]) && empty($errors)) {
+        $_SESSION["user_id"] = $user["id"];
+        header("Location: home.php");
+        exit();
+    } else {
+        $errors["login"] = "Invalid email or password";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,15 +65,25 @@
                 <form class="login-form" action="" method="post">
                     <div class="input">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                        <input type="email" name="email" id="email" placeholder="Enter your email"
+                            value="<?php echo isset($_POST["email"]) ? $_POST["email"] : ""; ?>">
+                        <?php if (!empty($errors["email"])) : ?>
+                        <span class="error"><?php echo $errors["email"]; ?></span>
+                        <?php endif; ?>
                     </div>
 
                     <div class="input">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" placeholder="********" required>
+                        <input type="password" name="password" id="password" placeholder="********">
+                        <?php if (!empty($errors["password"])) : ?>
+                        <span class="error"><?php echo $errors["password"]; ?></span>
+                        <?php endif; ?>
                     </div>
 
                     <button class="btn btn--submit" type="submit">Login</button>
+                    <?php if (!empty($errors["login"])) : ?>
+                    <span class="error"><?php echo $errors["login"]; ?></span>
+                    <?php endif; ?>
 
                     <p class="fs-body-sm">New to picfolio?
                         <a href="/signup.php" class="text-neutral-900 fw-bold">Sign Up</a>

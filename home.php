@@ -20,9 +20,9 @@
             <a href="/upload.php" class="btn btn--upload" style="text-decoration:none">
                 Upload
             </a>
-            <button class="btn btn--logout">
+            <a href="/logout.php" class="btn btn--logout" style="text-decoration:none" class="fw-bold text-neutral-900">
                 Logout
-            </button>
+            </a>
         </div>
     </header>
     <main style="display:grid;place-items:center">

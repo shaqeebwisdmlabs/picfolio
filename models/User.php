@@ -18,10 +18,10 @@ class User
     {
         $query = "SELECT * FROM users WHERE email='$email'";
         $result = mysqli_query($this->conn, $query);
-        if (mysqli_num_rows($result) > 0) {
-            return true;
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
         }
-
-        return false;
     }
 }
