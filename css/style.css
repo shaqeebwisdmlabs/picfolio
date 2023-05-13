@@ -340,14 +340,13 @@ body {
 }
 
 .btn--logout {
-  color: var(--clr-neutral-900);
-  background-color: var(--clr-neutral-200);
+  color: var(--clr-neutral-100);
+  background-color: hsl(var(--clr-red));
   transition: background 150ms ease-in-out;
 }
 
 .btn--logout:is(:hover, :focus) {
-  color: var(--clr-neutral-100);
-  background-color: var(--clr-neutral-300);
+  background-color: hsl(var(--clr-red) / 0.75);
 }
 
 .btn--upload {
