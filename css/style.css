@@ -116,14 +116,14 @@ select {
 
 .container {
   --max-width: 1120px;
-  --padding: 1rem;
+  --padding: 1.5rem;
 
   width: min(var(--max-width), 100% - var(--padding));
   margin-inline: auto;
 }
 
 .box-shadow {
-  box-shadow: 0px 2px 4px rgba(140, 143, 150, 0.15);
+  box-shadow: 0px 2px 8px rgba(140, 143, 150, 0.25);
 }
 
 /* text color */
@@ -241,22 +241,8 @@ body {
   gap: 0.25rem;
 }
 
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
 .form-container {
   padding: 2em;
-}
-
-.image-container {
-  display: block;
-  min-height: 100vh;
-  background-image: url("https://source.unsplash.com/random/?art,abstract,architecture,interior,3d,aesthetic,modern,minimalist");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .login,
@@ -279,14 +265,16 @@ body {
 }
 
 .login-form label,
-.signup-form label {
+.signup-form label,
+.image-form label {
   font-size: var(--fs-body-sm);
   font-weight: var(--fw-bold);
   margin-bottom: 0.25em;
 }
 
 .login-form input,
-.signup-form input {
+.signup-form input,
+.image-form input {
   width: 100%;
   padding: 0.375em 0.75em;
   border: 1.5px solid hsl(220, 2%, 31%, 0.25);
@@ -294,23 +282,24 @@ body {
 }
 
 .login-form input::placeholder,
-.signup-form input::placeholder {
+.signup-form input::placeholder,
+.image-form input::placeholder {
   color: hsl(240, 3%, 11%, 0.5);
   font-size: 0.875rem;
 }
 
 .btn {
   cursor: pointer;
-  width: 100%;
   outline: none;
   border: 0;
-  padding: 0.625em 0.75em;
+  padding: 0.5em 1.5em;
   border-radius: 100vw;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: var(--fw-bold);
 }
 
 .btn--submit {
+  width: 100%;
   margin-top: 0.875em;
   background-color: var(--clr-neutral-900);
   color: var(--clr-neutral-100);
@@ -318,5 +307,262 @@ body {
 }
 
 .btn--submit:is(:hover, :focus) {
-  background-color: var(--clr-neutral-500);
+  background-color: var(--clr-neutral-300);
+}
+
+@media (min-width: 640px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .image-container {
+    display: block;
+    min-height: 100vh;
+    background-image: url("https://source.unsplash.com/random/?art,abstract,architecture,interior,3d,aesthetic,modern,minimalist");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.primary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 0;
+}
+
+.header-btns {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn--logout {
+  transition: background 150ms ease-in-out;
+}
+
+.btn--logout:is(:hover, :focus) {
+  color: var(--clr-neutral-100);
+  background-color: var(--clr-neutral-300);
+}
+
+.btn--upload {
+  background-color: var(--clr-neutral-900);
+  color: var(--clr-neutral-100);
+  transition: background 150ms ease-in-out;
+}
+
+.btn--upload:is(:hover, :focus) {
+  background-color: var(--clr-neutral-300);
+}
+
+/* upload */
+
+.separator {
+  position: relative;
+  display: block;
+  margin: 0.5em 0;
+}
+
+.separator::before {
+  content: "";
+  position: absolute;
+  background: linear-gradient(
+    to left,
+    var(--clr-neutral-300),
+    var(--clr-neutral-100)
+  );
+  height: 1.5px;
+  width: 7.5rem;
+  top: 50%;
+  right: 1.5rem;
+}
+
+.separator::after {
+  content: "";
+  position: absolute;
+  background: linear-gradient(
+    to right,
+    var(--clr-neutral-300),
+    var(--clr-neutral-100)
+  );
+  height: 1.5px;
+  width: 7.5rem;
+  top: 50%;
+  left: 1.5rem;
+}
+
+.upload-files {
+  --max-width: 640px;
+  --margin: 1.125em;
+  width: min(var(--max-width), 100% - var(--margin));
+  margin-inline: auto;
+  border-radius: 0.5rem;
+  padding: 1.5em;
+  margin: 0 1.25em !important;
+}
+
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px dashed var(--clr-neutral-300);
+  border-radius: 0.25rem;
+  padding: 1.25em;
+  margin-top: 1em;
+  transition: background 300ms ease, border 300ms ease;
+}
+
+.upload-area.active {
+  background-color: var(--clr-neutral-200);
+  border-color: var(--clr-neutral-500);
+}
+
+.btn-choose {
+  border: 0;
+  cursor: pointer;
+  background-color: var(--clr-neutral-900);
+  color: var(--clr-neutral-100);
+  font-weight: 500;
+  padding: 0.5em 1.25em;
+  margin: 0.5em 0 0.25em;
+  border-radius: 0.25rem;
+  transition: background 200ms ease;
+}
+
+.btn-choose:is(:hover, :focus-visible) {
+  background-color: var(--clr-neutral-300);
+}
+
+.upload--icon img {
+  width: 2rem;
+  margin-bottom: 0.5em;
+}
+
+/* image grid */
+
+.gallery {
+  margin-top: 5em;
+}
+
+.image-grid {
+  margin: 2em 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 540px) {
+  .image-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 860px) {
+  .image-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.image-preview {
+  --max-width: 640px;
+  --margin: 1.125em;
+  width: min(var(--max-width), 100% - var(--margin));
+  margin-block: 5em;
+}
+
+.image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  color: var(--clr-neutral-100);
+  font-size: 1.125rem;
+}
+
+.image-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 1;
+  padding: 1em;
+  transition: bottom 250ms ease-in-out;
+}
+
+.image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 1;
+  background-image: linear-gradient(transparent, transparent, hsl(240, 6%, 6%));
+  transition: opacity 250ms ease-in-out;
+}
+
+@media (min-width: 540px) {
+  .image-overlay {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    bottom: -100%;
+    right: 0;
+    opacity: 0;
+    padding: 1em;
+    transition: bottom 250ms ease-in-out;
+  }
+
+  .image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    background-image: linear-gradient(
+      transparent,
+      transparent,
+      hsl(240, 6%, 6%, 0.5),
+      hsl(240, 6%, 6%)
+    );
+    transition: opacity 250ms ease-in-out;
+  }
+
+  .image:is(:hover, :focus) .image-overlay {
+    bottom: 0;
+    opacity: 1;
+  }
+
+  .image:is(:hover, :focus)::before {
+    opacity: 1;
+  }
+}
+
+.image-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn--action {
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  border-radius: 100%;
+  padding: 0.5em;
+  background-color: var(--clr-neutral-100);
+}
+
+.image-title {
+  width: 8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

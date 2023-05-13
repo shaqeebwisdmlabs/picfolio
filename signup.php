@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,500,700,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Picfolio | Sign Up</title>
 </head>
 
@@ -14,11 +14,11 @@
     <div class="wrapper signup-wrapper">
         <div class="form-container">
             <div class="logo">
-                <img src="./assets/images/logo-icon.png" alt="">
-                <h1 class="fw-semi-bold fs-title-sm">Picfolio</h1>
+                <img src="./assets/images/logo-icon.png" alt="" height="24px" width="24px">
+                <h1 class="fw-bold fs-title-sm">Picfolio</h1>
             </div>
             <div class="signup">
-                <h3 class="fw-black fs-title-lg">Create your accout</h3>
+                <h3 class="fw-black fs-title-lg" style="text-align:center">Create your accout</h3>
                 <p class="text-neutral-300 fs-body-sm" style="max-width:95%; text-align:center;margin-top:0.5em">Create
                     your account and get 30 day free trial</p>
 
