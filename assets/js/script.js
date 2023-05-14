@@ -42,24 +42,4 @@
       }
     };
   };
-
-  // const uploadFile = (file) => {
-  //   const data = {
-  //     image: file,
-  //   };
-
-  //   $.ajax({
-  //     url: "upload.php",
-  //     type: "POST",
-  //     data: data,
-  //     contentType: false,
-  //     processData: false,
-  //     success: function (response) {
-  //       console.log("Upload success!");
-  //     },
-  //     error: function (xhr, status, error) {
-  //       console.error("Upload error:", error);
-  //     },
-  //   });
-  // };
 })(jQuery);
