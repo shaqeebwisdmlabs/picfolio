@@ -24,4 +24,10 @@ class User
             return null;
         }
     }
+
+    public function uploadImage($user_id, $filename, $title)
+    {
+        $query = "INSERT INTO images (user_id, filename, image_title) VALUES ('$user_id','$filename','$title')";
+        return $result = mysqli_query($this->conn, $query);
+    }
 }

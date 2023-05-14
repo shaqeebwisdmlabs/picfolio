@@ -2,49 +2,64 @@
   let fileInput = null;
 
   $(".upload-area").on("dragover", (e) => {
-    console.log("drag");
     e.preventDefault();
     const element = e.target;
     if (!element.classList.contains("active")) element.classList.add("active");
   });
 
   $(".upload-area").on("dragleave", (e) => {
-    console.log("drag leave");
     e.preventDefault();
     const element = e.target;
     element.classList.remove("active");
   });
 
   $(".upload-area").on("drop", (e) => {
-    console.log("drop");
     e.preventDefault();
     const element = e.target;
     element.classList.remove("active");
-    fileInput = e.originalEvent.dataTransfer.files;
-    selectFile();
-    console.log(fileInput);
+    fileInput = e.originalEvent.dataTransfer.files[0];
+    previewImage();
   });
 
-  $("#select-files").on("change", (e) => {
-    console.log("change");
-    const fileUploaded = e.target.files;
+  $("#image").on("change", (e) => {
+    const fileUploaded = e.target.files[0];
     fileInput = fileUploaded;
-    selectFile();
-    console.log(fileInput);
+    previewImage();
   });
 
-  const selectFile = () => {
+  const previewImage = () => {
     let reader = new FileReader();
 
     if (fileInput) {
-      reader.readAsDataURL(fileInput[0]);
+      reader.readAsDataURL(fileInput);
     }
 
     reader.onload = (readerEvent) => {
       if (readerEvent.target?.result) {
         console.log(readerEvent.target.result);
         document.getElementById("preview").src = reader.result;
+        uploadFile(fileInput);
       }
     };
   };
+
+  // const uploadFile = (file) => {
+  //   const data = {
+  //     image: file,
+  //   };
+
+  //   $.ajax({
+  //     url: "upload.php",
+  //     type: "POST",
+  //     data: data,
+  //     contentType: false,
+  //     processData: false,
+  //     success: function (response) {
+  //       console.log("Upload success!");
+  //     },
+  //     error: function (xhr, status, error) {
+  //       console.error("Upload error:", error);
+  //     },
+  //   });
+  // };
 })(jQuery);
