@@ -1,5 +1,9 @@
 <?php include_once("views/header.php"); ?>
 <?php include("views/navbar.php"); ?>
+<?php if (!isset($_SESSION['user_id']) && !is_numeric($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+} ?>
 
 <main style="display:grid;place-items:center">
     <section class="container gallery">
@@ -16,20 +20,20 @@
 </main>
 
 <script>
-const copyToClipboard = (text) => {
-    var input = document.createElement("input");
-    document.body.appendChild(input);
+    const copyToClipboard = (text) => {
+        var input = document.createElement("input");
+        document.body.appendChild(input);
 
-    input.value = text;
+        input.value = text;
 
-    input.select();
+        input.select();
 
-    document.execCommand("copy");
+        document.execCommand("copy");
 
-    document.body.removeChild(input);
+        document.body.removeChild(input);
 
-    alert("URL copied to clipboard: " + text);
-};
+        alert("URL copied to clipboard: " + text);
+    };
 </script>
 
 <?php include_once("views/footer.php"); ?>
