@@ -5,6 +5,8 @@ require_once "./models/Image.php";
 
 session_start();
 
+$user_id = null;
+
 if (isset($_SESSION["user_id"])) {
     $user_id = $_SESSION["user_id"];
 }

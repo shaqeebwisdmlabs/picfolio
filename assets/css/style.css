@@ -681,3 +681,8 @@ body {
   height: 50vh;
   padding: 0 0 1em;
 }
+
+.image-view {
+  max-width: 45rem;
+  margin: 2em auto;
+}
