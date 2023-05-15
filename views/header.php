@@ -1,6 +1,7 @@
 <?php
 require_once "./config/dbconn.php";
 require_once "./models/User.php";
+require_once "./models/Image.php";
 
 session_start();
 

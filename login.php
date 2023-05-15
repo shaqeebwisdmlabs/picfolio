@@ -1,3 +1,4 @@
+<?php include("views/header.php"); ?>
 <?php
 $errors = array();
 
@@ -76,3 +77,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="image-container">
     </div>
 </div>
+
+<?php include("views/footer.php"); ?>

@@ -1,8 +1,6 @@
 <?php include("views/header.php"); ?>
 
 <?php
-require_once "./models/User.php";
-
 $errors = array();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -39,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $userModel->create($name, $email, $hashedPassword);
+        $userModel->createUser($name, $email, $hashedPassword);
 
         $user = $userModel->findUserByEmail($email);
         session_start();

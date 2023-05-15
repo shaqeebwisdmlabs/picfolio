@@ -1,6 +1,5 @@
 <?php
-
-include("views/header.php");
+include_once("views/header.php");
 
 if (isset($_SESSION['user_id'])) {
     require('home.php');
@@ -8,4 +7,4 @@ if (isset($_SESSION['user_id'])) {
     require('login.php');
 }
 
-include("views/footer.php");
+include_once("views/footer.php");
