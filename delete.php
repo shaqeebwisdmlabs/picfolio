@@ -1,20 +1,12 @@
 <?php
 include_once("views/header.php");
 
-$image_id = $_GET['id'];
+$salt = "POzxNTvFtNQqjzgJFwou";
+$encrypted_id = $_GET['id'];
+$decrypted_id_raw = base64_decode($encrypted_id);
+$image_id = preg_replace(sprintf('/%s/', $salt), '', $decrypted_id_raw);
 
-if (isset($_SESSION['user_id']) && is_numeric($_SESSION['user_id'])) {
-    $query = "SELECT * FROM images WHERE id = '$image_id'";
-    $result = mysqli_query($conn, $query);
-    $image = mysqli_fetch_assoc($result);
-    $filename = $image['filename'];
-
-    $upload_dir = 'uploads/';
-    unlink($upload_dir . $filename);
-
-    $query = "DELETE FROM images WHERE id = '$image_id'";
-    $result = mysqli_query($conn, $query);
-
-    header("Location: home.php");
-    exit();
-}
+$userModel = new User($conn);
+$imageModel = new Image($conn);
+$imageController = new ImageController($userModel, $imageModel);
+$errors = $imageController->delete($conn, $image_id);

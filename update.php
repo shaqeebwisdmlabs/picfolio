@@ -1,33 +1,19 @@
 <?php include("views/header.php"); ?>
 
 <?php
-$image_id = $_GET['id'];
+$salt = "POzxNTvFtNQqjzgJFwou";
+$encrypted_id = $_GET['id'];
+$decrypted_id_raw = base64_decode($encrypted_id);
+$image_id = preg_replace(sprintf('/%s/', $salt), '', $decrypted_id_raw);
 
-$errors = array();
+$userModel = new User($conn);
+$imageModel = new Image($conn);
+$imageController = new ImageController($userModel, $imageModel);
 
-$query = "SELECT * FROM images WHERE id = '$image_id'";
-$result = mysqli_query($conn, $query);
+$result = $imageModel->fetchImageById($image_id);
 $image = mysqli_fetch_assoc($result);
 
-
-if (isset($_POST['update']) && isset($_POST['image-title'])) {
-    $new_title = $_POST['image-title'];
-
-    if (empty($new_title)) {
-        $errors["image_title"] = "Title is required";
-    }
-
-    if (empty($errors)) {
-        $imageModel = new Image($conn);
-        $update = $imageModel->updateImageTitle($image_id, $new_title);
-        if (!$upload) {
-            $errors["upload"] = "Something went wrong while updating";
-        }
-        header("Location: home.php");
-        exit();
-    }
-}
-
+$errors = $imageController->update($image_id);
 ?>
 
 <?php include("views/navbar-upload.php"); ?>

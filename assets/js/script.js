@@ -129,4 +129,6 @@
     updateDots(currentDot, targetDot);
     showHideArrows(targetIndex, prevBtn, nextBtn, slides);
   });
+
+  // lazy loading for the images
 })(jQuery);

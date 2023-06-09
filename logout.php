@@ -1,7 +1,8 @@
 <?php
-session_start();
-unset($_SESSION['user_id']);
-session_destroy();
 
-header("Location: login.php");
-exit();
+require_once "./models/UserModel.php";
+require_once "./controllers/AuthController.php";
+
+$userModel = new User($conn);
+$authController = new AuthController($userModel);
+$authController->logout();

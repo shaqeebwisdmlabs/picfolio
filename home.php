@@ -1,16 +1,16 @@
 <?php include_once("views/header.php"); ?>
 <?php include("views/navbar.php"); ?>
-<?php if (!isset($_SESSION['user_id']) && !is_numeric($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit();
-} ?>
+
+<?php
+$userModel = new User($conn);
+$imageModel = new Image($conn);
+$imageController = new ImageController($userModel, $imageModel);
+$images = $imageController->index();
+?>
 
 <main style="display:grid;place-items:center">
     <section class="container gallery">
         <?php
-        $imageModel = new Image($conn);
-        $images = $imageModel->fetchImage($user_id);
-
         if (!$images->num_rows == 0) {
             include "views/image-grid.php";
         } else {

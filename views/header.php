@@ -1,7 +1,9 @@
 <?php
 require_once "./config/dbconn.php";
-require_once "./models/User.php";
-require_once "./models/Image.php";
+require_once "./models/UserModel.php";
+require_once "./models/ImageModel.php";
+require_once "./controllers/AuthController.php";
+require_once "./controllers/ImageController.php";
 
 session_start();
 
